@@ -1,9 +1,10 @@
 from netmiko import ConnectHandler
+import os 
 device = {
     "device_type": "cisco_ios",
-    "host": "54.90.112.247",
-    "username": "mimekraz",
-    "password": "password101!"
+    "host": os.getenv("CISCO_HOST"),
+    "username": os.getenv("CISCO_USERNAME"),
+    "password": os.getenv("CISCO_PASSWORD")
 }
 connection = ConnectHandler(**device)
 print("Successfully connected to the Cisco device!")
@@ -21,6 +22,7 @@ for line in lines:
         data = line.split()
         print(data)
         if data[-2]== "up" and data[-1] == "down":
-            print(f"Interface {data[0]} is UP and operational.")
+            print(f"Interface {data[0]} is  operational.")
         else:
-            print(f"Interface {data[0]} is DOWN or not operational.") 
+            print(f"Interface {data[0]} is checke required.") 
+
